@@ -44,7 +44,7 @@ NaluBaseNode::~NaluBaseNode()
 
 void NaluBaseNode::declareParameters()
 {
-  declare_parameter("serial_port",     "/dev/ttyUSB0");
+  declare_parameter("serial_port",     "/dev/ttyACM0");
   declare_parameter("serial_baud",     115200);
   declare_parameter("max_linear_vel",  1.0);
   declare_parameter("max_angular_vel", 2.0);

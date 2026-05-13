@@ -16,8 +16,8 @@ services:
       - ./logs:/ros2_ws/logs    # Persistência de logs
       - /dev:/dev               # Passthrough de dispositivos USB/Serial
     devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0   # Exemplo: serial do robô
-      # - /dev/ttyACM0:/dev/ttyACM0 # Descomentar se necessário
+      #- /dev/ttyUSB0:/dev/ttyUSB0   # Exemplo: serial do robô
+      - /dev/ttyACM0:/dev/ttyACM0 # Descomentar se necessário
     command: >
       ros2 launch nalu_bringup nalu.launch.py
     restart: unless-stopped
