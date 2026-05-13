@@ -1,0 +1,45 @@
+services:
+
+  nalu:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: nalu:latest
+    container_name: nalu_robot
+    network_mode: host          # ROS 2 DDS precisa de host network
+    privileged: true            # Acesso a USB e dispositivos serial
+    environment:
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    volumes:
+      - ./src:/ros2_ws/src      # Hot-reload do código
+      - ./logs:/ros2_ws/logs    # Persistência de logs
+      - /dev:/dev               # Passthrough de dispositivos USB/Serial
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0   # Exemplo: serial do robô
+      # - /dev/ttyACM0:/dev/ttyACM0 # Descomentar se necessário
+    command: >
+      ros2 launch nalu_bringup nalu.launch.py
+    restart: unless-stopped
+
+  # Shell de desenvolvimento interativo
+  nalu_dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: nalu:latest
+    container_name: nalu_dev
+    network_mode: host
+    privileged: true
+    environment:
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+    volumes:
+      - ./src:/ros2_ws/src
+      - ./logs:/ros2_ws/logs
+      - /dev:/dev
+    stdin_open: true
+    tty: true
+    command: bash
+    profiles:
+      - dev

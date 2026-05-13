@@ -1,0 +1,21 @@
+/**
+ * nalu_params.yaml
+ * Parâmetros de configuração do Robô Nalu
+ */
+
+nalu_base:
+  ros__parameters:
+
+    # --- Hardware ---
+    serial_port: "/dev/ttyUSB0"
+    serial_baud: 115200
+
+    # --- Publicação ---
+    odom_frame_id:  "odom"
+    base_frame_id:  "base_link"
+    publish_rate_hz: 50.0
+
+    # --- Limites de segurança ---
+    max_linear_vel:  1.0    # m/s
+    max_angular_vel: 2.0    # rad/s
+    cmd_vel_timeout: 0.5    # segundos sem comando → parar
