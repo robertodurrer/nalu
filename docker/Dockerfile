@@ -1,5 +1,4 @@
-FROM osrf/ros:jazzy-ros-base
-
+FROM ros:jazzy-ros-base
 # Metadados
 LABEL maintainer="robertodurrer"
 LABEL project="nalu"
@@ -24,6 +23,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-jazzy-std-msgs \
     ros-jazzy-tf2 \
     ros-jazzy-tf2-ros \
+    ros-jazzy-xacro \
+    ros-jazzy-joint-state-publisher \
+    ros-jazzy-robot-state-publisher \
     udev \
     usbutils \
     && rm -rf /var/lib/apt/lists/*
